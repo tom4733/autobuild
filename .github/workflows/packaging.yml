@@ -60,7 +60,7 @@ on:
     branches:
       - main
     paths:
-      - 'bconfig'
+      - 'build/Lede/relevance/armsrstart'
 
 env:
   GITHUB_LINK: https://github.com/${{github.repository}}
