@@ -166,9 +166,9 @@ jobs:
         body: ${{ env.Tongzhi_Date }}
         artifacts: "${{ env.FIRMWARE_PATH }}/*"
         
-    - name: 自动打包aarch64系列固件
-      if: steps.compile.outcome == 'success'
-      uses: 281677160/common@aarch
+    - name: 发送[在线更新固件]至云端
+      if: steps.compile.outcome == 'success' && env.UPDATE_FIRMWARE_ONLINE == 'true'
+      uses: 281677160/common@cloud
 
     - name: Telegram或pushplus信息通知
       if: env.PUSH_PLUS_TOKEN && env.INFORMATION_NOTICE == 'PUSH' || env.TELEGRAM_BOT_TOKEN && env.INFORMATION_NOTICE == 'TG'
