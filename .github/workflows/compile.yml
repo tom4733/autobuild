@@ -86,25 +86,8 @@ jobs:
         cd openwrt
         source ${BUILD_PATH}/common.sh && Diy_menu2
  
-    - name: 更新插件源
-      run: |
-        cd openwrt
-        source ${BUILD_PATH}/common.sh && Diy_menu3
- 
-    - name: 加载自定义设置
-      run: |
-        cd openwrt
-        source ${BUILD_PATH}/common.sh && Diy_menu4
-        
-    - name: 安装插件源
-      run: |
-        cd openwrt
-        source ${BUILD_PATH}/common.sh && Diy_menu5
-
-    - name: 生成"${{matrix.target}}"配置文件
-      run: |
-        cd openwrt
-        source ${BUILD_PATH}/common.sh && Diy_menu6
+    - name: 运行自定义文件和其他
+      uses: 281677160/common@need
         
     - name: 编译信息
       continue-on-error: true
