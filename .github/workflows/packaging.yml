@@ -2,7 +2,7 @@
 # 打包Amlogic/Rockchip固件,请勿修改文件名称（packaging.yml）
 #
 
-name: 打包Amlogic/Rockchip固件
+name: 打包aarch64系列固件
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -62,7 +62,7 @@ env:
 
 jobs:
   build:
-    name: 编译OpenWrt固件
+    name: 打包aarch64系列固件
     runs-on: ubuntu-22.04
     steps:
     - name: 密匙检测（密匙为空则退出）
