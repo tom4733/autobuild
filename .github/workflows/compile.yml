@@ -121,7 +121,7 @@ jobs:
         echo "date=$(date "+%Y%m%d%H%M%S")" >> ${GITHUB_ENV}
 
     - name: 自动打包aarch64系列固件
-      if: steps.compile.outcome == 'success'
+      if: steps.compile.outcome == 'success' && env.PACKAGING_FIRMWARE == 'true'
       uses: 281677160/common@aarch
 
     - name: 整理固件文件夹(需配合diy-part.sh设定使用)
@@ -140,7 +140,7 @@ jobs:
         path: ${{ env.FIRMWARE_PATH }}
     
     - name: 发布固件
-      if: steps.compile.outcome == 'success' && env.UPLOAD_RELEASE == 'true' && env.ING_FIRMWAR == 'true' && env.REPO_TOKEN
+      if: steps.compile.outcome == 'success' && env.UPLOAD_RELEASE == 'true' && env.ING_FIRMWAR == 'true'
       uses: ncipollo/release-action@v1
       with:
         name: ${{ env.SOURCE }}-${{ env.PROMPT_TING }}
