@@ -98,7 +98,7 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
-    - name: 打包固件
+    - name: 拉取rootfs.tar.gz
       working-directory: /workdir
       run: |
         mkdir -p openwrt/bin/targets
