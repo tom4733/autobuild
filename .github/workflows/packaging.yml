@@ -37,6 +37,10 @@ on:
           - 'dev'
           - 'flippy'
           - 'rk3588'
+      openwrt_size:
+        description: '设置rootfs大小(单位：MiB)'
+        required: true
+        default: '512/2560'
       auto_kernel:
         description: '是否自动检测最新内核'
         required: false
@@ -71,6 +75,7 @@ jobs:
         echo "SOURCE=${{ inputs.source_branch }}" >> ${GITHUB_ENV}
         echo "amlogic_model=${{ inputs.amlogic_model }}" >> ${GITHUB_ENV}
         echo "amlogic_kernel=${{ inputs.amlogic_kernel }}" >> ${GITHUB_ENV}
+        echo "openwrt_size=${{ inputs.openwrt_size }}" >> ${GITHUB_ENV}
         echo "auto_kernel=${{ inputs.auto_kernel }}" >> ${GITHUB_ENV}
         echo "kernel_repo=ophub/kernel" >> ${GITHUB_ENV}
         echo "kernel_usage=${{ inputs.kernel_usage }}" >> ${GITHUB_ENV}
