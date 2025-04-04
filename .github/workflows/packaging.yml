@@ -101,6 +101,9 @@ jobs:
         echo "kernel_repo=${{ inputs.kernel_repo }}" >> ${GITHUB_ENV}
         echo "kernel_usage=${{ inputs.kernel_usage }}" >> ${GITHUB_ENV}
         echo "builder_name=${{ inputs.builder_name }}" >> ${GITHUB_ENV}
+        echo "TARGET_PROFILE=aarch_64" >> ${GITHUB_ENV}
+
+        
 
     - name: 部署编译环境
       env:
