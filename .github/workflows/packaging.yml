@@ -37,27 +37,11 @@ on:
           - 'dev'
           - 'flippy'
           - 'rk3588'
-      kernel_repo:
-        description: "Set the kernel repository"
-        required: false
-        default: "ophub/kernel"
-        type: choice
-        options:
-          - ophub/kernel
       auto_kernel:
         description: '是否自动检测最新内核'
         required: false
         default: 'true'
         type: boolean
-      builder_name:
-        description: "Set OpenWrt builder signature."
-        required: false
-        default: "ophub"
-        type: choice
-        options:
-          - ophub
-          - angel
-          - yourname
       UPLOAD_FIRMWARE:
         description: '上传固件到 Github Artifacts'
         required: false
@@ -88,9 +72,9 @@ jobs:
         echo "amlogic_model=${{ inputs.amlogic_model }}" >> ${GITHUB_ENV}
         echo "amlogic_kernel=${{ inputs.amlogic_kernel }}" >> ${GITHUB_ENV}
         echo "auto_kernel=${{ inputs.auto_kernel }}" >> ${GITHUB_ENV}
-        echo "kernel_repo=${{ inputs.kernel_repo }}" >> ${GITHUB_ENV}
+        echo "kernel_repo=ophub/kernel" >> ${GITHUB_ENV}
         echo "kernel_usage=${{ inputs.kernel_usage }}" >> ${GITHUB_ENV}
-        echo "builder_name=${{ inputs.builder_name }}" >> ${GITHUB_ENV}
+        echo "builder_name=ophub" >> ${GITHUB_ENV}
         echo "TARGET_PROFILE=aarch_64" >> ${GITHUB_ENV}
         echo "UPLOAD_FIRMWARE=${{ inputs.UPLOAD_FIRMWARE }}" >> $GITHUB_ENV
         echo "UPLOAD_RELEASE=${{ inputs.UPLOAD_RELEASE }}" >> $GITHUB_ENV
