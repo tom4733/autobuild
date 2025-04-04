@@ -178,6 +178,7 @@ jobs:
         source ${BUILD_PATH}/common.sh && Diy_menu2
  
     - name: 运行自定义文件和其他
+      id: compile
       uses: 281677160/common@need
         
     - name: 上传"${{ matrix.target }}"配置文件在 Github Artifacts
