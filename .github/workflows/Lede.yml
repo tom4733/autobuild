@@ -164,7 +164,7 @@ jobs:
         source ${BUILD_PATH}/common.sh && Diy_menu2
         echo "SHANG_CHUAN=true" >> ${GITHUB_ENV}
  
-    - name: 运行自定义文件和其他
+    - name: 运行其他和SSH远程连接（make menuconfig）
       id: compile
       uses: 281677160/common@need
         
