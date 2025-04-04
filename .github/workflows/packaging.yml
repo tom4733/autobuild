@@ -130,4 +130,4 @@ jobs:
         token: ${{ secrets.REPO_TOKEN }}
         allowUpdates: true
         body: ${{ env.TARGET_PROFILE }}固件
-        artifacts: "${{ env.FIRMWARE }}/*"
+        artifacts: "${{ env.FIRMWARE_PATH }}/*"
