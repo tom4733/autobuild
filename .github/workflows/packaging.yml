@@ -106,15 +106,15 @@ jobs:
         mkdir -p openwrt/bin/targets
         ln -sf /workdir/openwrt ${GITHUB_WORKSPACE}/openwrt
         cd ${GITHUB_WORKSPACE}/openwrt
-        curl -s -H "Authorization: Bearer ${{ env.REPO_TOKEN }}" https://api.github.com/repos/281677160/autobuild/releases/tags/targz > aarch
+        curl -s -H "Authorization: Bearer ${{ env.REPO_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/releases/tags/targz > aarch
         if [[ `grep -c "Not Found" aarch` -ge '1' ]]; then
           echo "Releases里的没有targz名称的tag存在"
           exit 1
-        elif [[ `grep -c "${SOURCE}-armvirt-64-default-rootfs.tar.gz" aarch` -eq '0' ]]; then
+        elif [[ `grep -c "${{ env.SOURCE }}-armvirt-64-default-rootfs.tar.gz" aarch` -eq '0' ]]; then
           echo "Releases里的targz没有${SOURCE}-armvirt-64-default-rootfs.tar.gz存在"
           exit 1
-        elif [[ `grep -c "${SOURCE}-armvirt-64-default-rootfs.tar.gz" aarch` -ge '1' ]]; then
-          curl -s -o bin/targets/openwrt-armvirt-64-default-rootfs.tar.gz https://github.com/${{ github.repository }}/releases/download/targz/${SOURCE}-armvirt-64-default-rootfs.tar.gz
+        elif [[ `grep -c "${{ env.SOURCE }}-armvirt-64-default-rootfs.tar.gz" aarch` -ge '1' ]]; then
+          wget -q https://github.com/${{ github.repository }}/releases/download/targz/${{ env.SOURCE }}-armvirt-64-default-rootfs.tar.gz -O bin/targets/openwrt-armvirt-64-default-rootfs.tar.gz
         else
           echo "未知情况"
           exit 1
