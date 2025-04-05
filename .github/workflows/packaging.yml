@@ -155,7 +155,7 @@ jobs:
           写入EMMC：Login to OpenWrt → System → Amlogic Service → Install OpenWrt
 
     - name: Telegram或pushplus信息通知
-      if: steps.compile.outcome == 'success' && env.PUSH_PLUS_TOKEN || steps.compile.outcome == 'success' && env.TELEGRAM_BOT_TOKEN
+      if: steps.compile.outcome == 'success' && env.PUSH_PLUS_TOKEN && env.INFORMATION_NOTICE == 'PUSH' || steps.compile.outcome == 'success' && env.TELEGRAM_BOT_TOKEN && env.INFORMATION_NOTICE == 'TG'
       run: |
         if [[ "${{ env.INFORMATION_NOTICE }}" == "TG" ]]; then
           curl -k --data chat_id="${{ env.TELEGRAM_CHAT_ID }}" --data "text=我亲爱的✨主人✨：您使用【${{matrix.target}}】文件夹编译【${REPO_BRANCH}分支的${{env.TARGET_PROFILE}}】固件顺利编译完成了✌️💯💐(${{env.WAREHOUSE_MAN}}仓库的#${{env.RUN_NUMBER}}号)！($(date +%Y年%m月%d号%H时%M分))" "https://api.telegram.org/bot${{ env.TELEGRAM_BOT_TOKEN }}/sendMessage"
