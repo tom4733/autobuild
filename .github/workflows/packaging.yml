@@ -59,6 +59,9 @@ on:
 
 env:
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+  PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
 jobs:
   build:
@@ -87,6 +90,8 @@ jobs:
         echo "UPLOAD_RELEASE=${{ inputs.UPLOAD_RELEASE }}" >> $GITHUB_ENV
         echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
         echo "date_tg=$(date +"%Y.%m%d.%H%M")" >> ${GITHUB_ENV}
+
+        
 
     - name: 部署编译环境
       env:
@@ -147,3 +152,13 @@ jobs:
           固件源码：${{ env.SOURCE }}
           内核仓库：${{ env.kernel_usage }}
           写入EMMC：Login to OpenWrt → System → Amlogic Service → Install OpenWrt
+
+    - name: Telegram或pushplus信息通知
+      if: steps.compile.outcome == 'success' && env.PUSH_PLUS_TOKEN || steps.compile.outcome == 'success' && env.TELEGRAM_BOT_TOKEN
+      run: |
+        if [[ "${{ env.INFORMATION_NOTICE }}" == "TG" ]]; then
+          curl -k --data chat_id="${{ env.TELEGRAM_CHAT_ID }}" --data "text=我亲爱的✨主人✨：您使用【${{matrix.target}}】文件夹编译【${REPO_BRANCH}分支的${{env.TARGET_PROFILE}}】固件顺利编译完成了✌️💯💐(${{env.WAREHOUSE_MAN}}仓库的#${{env.RUN_NUMBER}}号)！($(date +%Y年%m月%d号%H时%M分))" "https://api.telegram.org/bot${{ env.TELEGRAM_BOT_TOKEN }}/sendMessage"
+        fi
+        if [[ "${{ env.INFORMATION_NOTICE }}" == "PUSH" ]]; then
+          curl -k --data token="${{ env.PUSH_PLUS_TOKEN }}" --data title="[${{ env.SOURCE }}-${{ env.TARGET_PROFILE }}]编译成功" --data "content=我亲爱的✨主人✨：您使用【${{matrix.target}}】文件夹编译【${REPO_BRANCH}分支的${{env.TARGET_PROFILE}}】固件顺利编译完成了✌️💯💐(${{env.WAREHOUSE_MAN}}仓库的#${{env.RUN_NUMBER}}号)！($(date +%Y年%m月%d号%H时%M分))" "http://www.pushplus.plus/send"
+        fi
