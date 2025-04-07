@@ -33,6 +33,7 @@ on:
           - '360-t7-108M'
           - 'clt-r30b1-112M'
           - 'cmcc-rax3000m-emmc'
+          - 'cmcc_rax3000me'
           - 'jcg-q30'
           - 'xiaomi-redmi-router-ax6000'
       INFORMATION_NOTICE:
@@ -68,11 +69,10 @@ on:
         required: false
         default: 'true'
         type: boolean
-      UPDATE_FIRMWARE_ONLINE:
-        description: '增加在线更新固件功能/自动打包aarch64系列固件'
-        required: false
-        default: 'true'
-        type: boolean
+    #  description: '增加在线更新固件功能/自动打包aarch64系列固件'
+     #   required: false
+  #      default: 'true'
+    #    type: boolean
       COMPILATION_INFORMATION:
         description: '是否显示编译信息'
         required: false
